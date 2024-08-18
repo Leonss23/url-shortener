@@ -22,6 +22,7 @@ export function decode(s: string): number {
   for (let i = 0; i < s.length; i += 1) {
     const char = s[i]
     const value = charset.indexOf(char)
+    if (value < 0) return -1
     decoded = decoded * 62 + value
   }
 
