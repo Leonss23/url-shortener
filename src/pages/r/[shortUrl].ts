@@ -1,39 +1,31 @@
 import type { APIRoute } from "astro"
-import { dbConnect } from "../../api/db"
-import { decode } from "../../api/base62"
+import { eq } from "drizzle-orm"
+import { decode } from "../../lib/base62"
+import { attempt } from "../../lib/utils"
+import { dbConnect } from "../../db"
+import { urls } from "../../db/schema"
 
 export const prerender = false
 
-export const GET: APIRoute = async ({ locals: { runtime: { env } }, request, params: { shortUrl } }) => {
-  const db = dbConnect(env)
+export const GET: APIRoute = async ({ redirect, rewrite, locals: { runtime: { env } }, params: { shortUrl } }) => {
 
-  if (shortUrl == undefined)
-    return new Response("no shortUrl, redirection failed", {
-      status: 400
-    })
+  if (shortUrl == undefined) return rewrite("/404");
 
   const id = decode(shortUrl)
 
-  const res = await db.execute({
-    sql: "SELECT url FROM urls WHERE id = ?",
-    args: [id]
-  })
+  const db = dbConnect(env)
 
-  const url = res.rows[0][1]
-  if (url == undefined) {
-    return new Response("URL doesn't exist.", {
-      status: 404,
-    })
+  const { result, error } = await attempt(() => db.query.urls.findFirst({ columns: { url: true }, where: eq(urls.id, id) }))
+
+  if (error) {
+    console.error(error);
+    return rewrite("/500");
   }
 
+  if (!result) return rewrite("/404");
 
-  console.log({ url })
-  return new Response(null, {
-    status: 303,
-    headers: {
-      'Location': url.toString(),
-    }
-  })
+  const { url } = result
 
+  return redirect(url, 303)
 }
 
