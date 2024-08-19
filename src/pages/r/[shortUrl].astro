@@ -1,0 +1,30 @@
+---
+import { eq } from "drizzle-orm";
+import { decode } from "../../lib/base62";
+import { attempt } from "../../lib/utils";
+import { dbConnect } from "../../db";
+import { urls } from "../../db/schema";
+
+export const prerender = false;
+
+const { shortUrl } = Astro.params;
+
+if (shortUrl == undefined) return Astro.rewrite("/404");
+
+const id = decode(shortUrl);
+
+const db = dbConnect((Astro.locals as any).runtime.env);
+
+const { result, error } = await attempt(() =>
+  db.query.urls.findFirst({ columns: { url: true }, where: eq(urls.id, id) }),
+);
+
+if (error) {
+  console.error(error);
+  return Astro.rewrite("/500");
+}
+
+if (!result) return Astro.rewrite("/404");
+
+return Astro.redirect(result.url, 302);
+---
