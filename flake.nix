@@ -22,6 +22,7 @@
                     # wrangler
                     bun
                     nodejs
+                    turso-cli
                 ];
 
                 # nativeBuildInputs = with pkgs; [];
