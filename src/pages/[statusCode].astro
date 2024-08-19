@@ -1,0 +1,25 @@
+---
+import type { GetStaticPaths } from "astro";
+import statusMessages from "./_statusMessages.json";
+
+export const getStaticPaths = (() => {
+  return Object.keys(statusMessages).map((v) => ({
+    params: { statusCode: v },
+  }));
+}) satisfies GetStaticPaths;
+
+const { statusCode } = Astro.params;
+
+if (!(statusCode in statusMessages)) return Astro.rewrite("/404");
+const statusMessage = (statusMessages as any)[statusCode];
+---
+
+<body class="flex flex-col justify-center items-center w-dvw h-dvh">
+  <main class="flex flex-col items-center justify-center">
+    <!-- <svg src="asd"></svg> -->
+    <p class="text-6xl">
+      <span class="text-yellow-500">{statusCode}: </span>
+      {statusMessage}
+    </p>
+  </main>
+</body>

@@ -1,0 +1,5 @@
+{
+  "404": "Not Found",
+  "500": "Internal Server Error",
+  "503": "Server Unavailable"
+}
