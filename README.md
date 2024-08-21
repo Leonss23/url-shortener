@@ -1,6 +1,6 @@
 # URL Shortener
 
-## Ideas
+## To do / Ideas
 
 - Check other URL Shortener services for ideas
 - Use Cloudflare KV as cache (reduced latency)
