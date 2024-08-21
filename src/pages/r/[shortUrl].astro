@@ -1,9 +1,8 @@
 ---
-import { eq } from "drizzle-orm";
 import { decode } from "../../lib/base62";
-import { attempt } from "../../lib/utils";
 import { dbConnect } from "../../db";
-import { urls } from "../../db/schema";
+import getUrlById from "../../db/repository/getUrlById";
+import { ApiError } from "../../lib/ApiError";
 
 export const prerender = false;
 
@@ -15,16 +14,9 @@ const id = decode(shortUrl);
 
 const db = dbConnect((Astro.locals as any).runtime.env);
 
-const { result, error } = await attempt(() =>
-  db.query.urls.findFirst({ columns: { url: true }, where: eq(urls.id, id) }),
-);
+const url = await getUrlById(db, id);
 
-if (error) {
-  console.error(error);
-  return Astro.rewrite("/500");
-}
+if (url instanceof ApiError) return Astro.rewrite(`/${url.code}`);
 
-if (!result) return Astro.rewrite("/404");
-
-return Astro.redirect(result.url, 302);
+return Astro.redirect(url, 302);
 ---
