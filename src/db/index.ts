@@ -2,7 +2,9 @@ import { createClient } from "@libsql/client/web";
 import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql";
 import * as schema from "./schema"
 
-let db: LibSQLDatabase<typeof schema>
+export type DB = LibSQLDatabase<typeof schema>
+
+let db: DB
 
 export function dbConnect(env: Env) {
   if (db) return db
