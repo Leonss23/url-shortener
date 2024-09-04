@@ -36,8 +36,8 @@
   - Consider Mocking (e.g. DB interactions)
   - [x] `base62` testing
 - Performance
-  - Use Cloudflare D1 instead of Turso
   - Use Go for Workers/Functions (WASM)
+  - [x] Consider Cloudflare D1 instead of Turso (discarded: worse geographical availability)
 - Base requirements
   - Short URL
     - [x] Creation endpoint
