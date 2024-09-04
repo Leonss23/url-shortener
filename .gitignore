@@ -28,3 +28,4 @@ pnpm-debug.log*
 .dev.vars
 .direnv
 .wrangler
+worker-configuration.d.ts
