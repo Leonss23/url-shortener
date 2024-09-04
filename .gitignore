@@ -22,5 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# LOCAL
+
 .dev.vars
 .direnv
+.wrangler
