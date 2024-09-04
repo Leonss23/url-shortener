@@ -18,19 +18,23 @@
 ## To do / Ideas
 
 - Add documentation
+- Bugs/Features
+  - Data fetching
+    - Loading state
+    - Data race (when submitting many different URLs simultaneously)
+      - TanStack Query is a possible solution
+      - also check SolidJS built-in fetching mechanisms
+  - Improve result display using toasts (notification card)
+  - URL click counter
+  - URL tracking panel
+    - a URL table with the deduplicated, actual links
+    - another table for the URLs a user tracks
 - Workflow
   - CI/CD ([GitHub Actions](https://github.com/features/actions))
   - UI Component Testing ([Storybook](https://storybook.js.org/))
   - Consider E2E Testing ([Playwright](https://playwright.dev/))
   - Consider Mocking (e.g. DB interactions)
   - [x] `base62` testing
-- Features
-  - Loading state (fetching)
-  - Better client errors
-  - URL click counter
-  - URL tracking panel
-    - a URL table with the deduplicated, actual links
-    - another table for the URLs a user tracks
 - Performance
   - Use Cloudflare D1 instead of Turso
   - Use Go for Workers/Functions (WASM)
