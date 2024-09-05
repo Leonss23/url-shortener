@@ -19,11 +19,11 @@
 
 - Add documentation
 - Bugs/Features
-  - Use `OR IGNORE` with `RETURNING` when querying for URL (making it a single query)
   - URL click counter
   - URL tracking panel
     - a URL table with the deduplicated, actual links
     - another table for the URLs a user tracks
+  - [x] Use `OR IGNORE` with `RETURNING` when querying for URL (making it a single query)
   - Data fetching
     - Feedback
       - [x] Error
