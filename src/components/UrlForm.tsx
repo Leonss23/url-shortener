@@ -19,6 +19,7 @@ export default function UrlForm() {
           <input
             class="p-2 outline outline-red-600 sm:min-w-80 md:min-w-96"
             type="url"
+            required
             value="https://leonardo-gatti.pages.dev"
             ref={input}
           />
