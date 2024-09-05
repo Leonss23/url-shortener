@@ -9,7 +9,7 @@
 - [Solid](https://www.solidjs.com/) - Simpler, lightweight and performant interactive components
 - [TailwindCSS](https://tailwindcss.com/) - CSS framework
 - [Bun](https://bun.sh/) - For quicker testing (`bun test`) and development package management
-- [Turso](https://turso.tech/) - Replicated, Edge SQLite databases.
+- [Turso](https://turso.tech/) - Edge/distributed/replicated SQLite databases.
 - [DrizzleORM](https://orm.drizzle.team/) - Simple, lightweight, performant and Edge-compatible ORM
 - [Cloudflare](https://www.cloudflare.com/developer-platform/products/) - For deployment
   - [Pages](https://pages.cloudflare.com/) - CDN served static assets (Frontend)
@@ -19,16 +19,20 @@
 
 - Add documentation
 - Bugs/Features
-  - Data fetching
-    - Loading state
-    - Data race (when submitting many different URLs simultaneously)
-      - TanStack Query is a possible solution
-      - also check SolidJS built-in fetching mechanisms
-  - Improve result display using toasts (notification card)
+  - Use `OR IGNORE` with `RETURNING` when querying for URL (making it a single query)
   - URL click counter
   - URL tracking panel
     - a URL table with the deduplicated, actual links
     - another table for the URLs a user tracks
+  - Data fetching
+    - Feedback
+      - [x] Error
+      - [x] Loading
+      - [x] Success
+      - ~~Use toasts for feedback message~~
+    - [x] Data race (when submitting many different URLs simultaneously)
+      - [x] Use solid's `createResource` primitive
+      - ~~TanStack Query~~
 - Workflow
   - CI/CD ([GitHub Actions](https://github.com/features/actions))
   - UI Component Testing ([Storybook](https://storybook.js.org/))
@@ -36,7 +40,7 @@
   - Consider Mocking (e.g. DB interactions)
   - [x] `base62` testing
 - Performance
-  - Use Go for Workers/Functions (WASM)
+  - Benchmark Go for Workers/Functions (WASM)
   - [x] Consider Cloudflare D1 instead of Turso (discarded: worse geographical availability)
 - Base requirements
   - Short URL
