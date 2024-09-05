@@ -4,11 +4,11 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "test": "bun test",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "test": "vitest",
     "generate": "drizzle-kit generate",
     "deploy": "astro check && astro build && wrangler pages deploy"
   },
@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240815.0",
-    "@types/bun": "^1.1.6",
     "drizzle-kit": "^0.24.2",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
+    "vitest": "^2.0.5",
     "wrangler": "^3.72.0"
   }
 }
