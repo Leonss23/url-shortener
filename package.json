@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "generate": "drizzle-kit generate",
-    "deploy": "wrangler pages deploy"
+    "deploy": "astro check && astro build && wrangler pages deploy"
   },
   "dependencies": {
     "@astrojs/check": "0.9.3",
